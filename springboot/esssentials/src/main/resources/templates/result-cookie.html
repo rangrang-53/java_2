@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>쿠키 결과</title>
 </head>
 <body>
-$END$
+<h1 th:text="${message}">결과 메시지</h1>
+
+<!-- 쿠키에 저장된 사용자 이름을 표시 -->
+<p th:if="${username != null}" th:text="'사용자 이름: ' + ${username}"></p>
+
+<a href="/set-cookie">다시 쿠키 설정하기</a><br/>
+<a href="/get-cookie">쿠키 읽기</a><br/>
+<a href="/delete-cookie">쿠키 삭제</a>
+
 </body>
 </html>

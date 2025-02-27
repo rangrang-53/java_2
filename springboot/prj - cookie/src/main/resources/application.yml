@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: prj
+server:
+  port: 7778
