@@ -28,16 +28,7 @@ public class SessionController {
     }
 
     @GetMapping("/login")
-    public String login(
-            HttpSession session,
-            Model model
-    ) {
-
-        String id = (String) session.getAttribute("id");
-
-        if(id != null) {
-            model.addAttribute("id", id);
-        }
+    public String login() {
         return "login";
     }
 
