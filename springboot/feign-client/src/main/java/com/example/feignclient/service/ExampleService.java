@@ -2,6 +2,7 @@ package com.example.feignclient.service;
 
 
 import com.example.feignclient.DTO.DataRequestDTO;
+import com.example.feignclient.DTO.DataResponseDTO;
 import com.example.feignclient.client.ExampleClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,7 @@ public class ExampleService {
         return exampleClient.deleteData(id);
     }
 
-    //여기까지 삭제 메서드 작성 끝
+    public List<DataResponseDTO> getAllData() {
+        return exampleClient.getAllData();
+    }
 }

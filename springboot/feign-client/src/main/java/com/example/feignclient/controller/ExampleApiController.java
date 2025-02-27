@@ -2,6 +2,7 @@ package com.example.feignclient.controller;
 
 
 import com.example.feignclient.DTO.DataRequestDTO;
+import com.example.feignclient.DTO.DataResponseDTO;
 import com.example.feignclient.client.ExampleClient;
 import com.example.feignclient.service.ExampleService;
 import lombok.Getter;
@@ -41,6 +42,9 @@ public class ExampleApiController {
         return exampleService.deleteDataById(id);
     }
 
-    //전체 조회만 하면 됩니다.
+    @GetMapping("/all")
+    public List<DataResponseDTO> getAllData() {
+        return exampleService.getAllData();
+    }
 }
 

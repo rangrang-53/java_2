@@ -1,8 +1,11 @@
 package com.example.feignclient.client;
 
 import com.example.feignclient.DTO.DataRequestDTO;
+import com.example.feignclient.DTO.DataResponseDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @FeignClient(name = "exampleClient", url = "${feign-data.url}")
 public interface ExampleClient {
@@ -24,6 +27,6 @@ public interface ExampleClient {
     String deleteData(@PathVariable("id") Long id);
 
     //전체 조회 (추후에 해야함)
-    @GetMapping("/api/data")
-    String getAllData(@RequestBody DataRequestDTO dataRequestDTO);
+    @GetMapping("/api/data/all")
+    List<DataResponseDTO> getAllData();
 }
