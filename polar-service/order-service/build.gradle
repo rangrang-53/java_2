@@ -24,8 +24,12 @@ repositories {
 }
 
 dependencies {
+    //JDBC가 지원이 안됨 ->catalog-service 복사 x
     implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    //서버 (Netty 기반)
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
     runtimeOnly 'io.asyncer:r2dbc-mysql'

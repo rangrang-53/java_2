@@ -12,6 +12,20 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://polar-mysql:3306/catalog?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
     restart: always
+  
+  order-service:
+    build:
+      context: C:\Users\RANG\Desktop\java_2\polar-service\order-service
+      dockerfile: Dockerfile
+    depends_on:
+      - polar-mysql
+    image: "order-service"
+    container_name: "order-service"
+    ports:
+      - 9002:9002
+    environment:
+      - SPRING_R2DBC_URL:r2dbc:mysql://polar-mysql:3306/order?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+    restart: always
 
   polar-mysql:
     image: "mysql:latest"
