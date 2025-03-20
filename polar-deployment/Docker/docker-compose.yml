@@ -19,6 +19,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - polar-mysql
+      - catalog-service
     image: "order-service"
     container_name: "order-service"
     ports:
