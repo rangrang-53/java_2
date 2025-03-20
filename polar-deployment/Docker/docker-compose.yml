@@ -1,7 +1,7 @@
 services:
   catalog-service:
     build:
-      context: C:\Users\jurang\Desktop\java_2\polar-service\catalog-service
+      context: C:\Users\RANG\Desktop\java_2\polar-service\catalog-service
       dockerfile: Dockerfile
     depends_on:
       - polar-mysql
@@ -24,7 +24,7 @@ services:
     ports:
       - 9002:9002
     environment:
-      - SPRING_R2DBC_URL:r2dbc:mysql://polar-mysql:3306/order?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+      - SPRING_R2DBC_URL=r2dbc:mysql://polar-mysql:3306/order?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
     restart: always
 
   polar-mysql:
