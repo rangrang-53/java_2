@@ -1,4 +1,32 @@
+version: "3.8"
 services:
+  edge-service:
+    build:
+      context: C:\Users\RANG\Desktop\java_2\polar-service\edge-service
+      dockerfile: Dockerfile
+    image: "edge-service"
+    container_name: "edge-service"
+    ports:
+      - 9000:9000
+    environment:
+      - CATALOG_SERVICE_URL=http://catalog-service:9001
+      - ORDER_SERVICE_URL=http://order-service:9002
+    
+  dispatcher-service:
+    build:
+      context: C:\Users\RANG\Desktop\java_2\polar-service\dispatcher-service
+      dockerfile: Dockerfile
+    image: "dispatcher-service"
+    container_name: "dispatcher-service"
+    ports:
+      - 9003:9003
+    environment:
+      - SPRING_R2DBC_URL=r2dbc:mysql://polar-mysql:3306/order
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - CATALOG_SERVICE_URL=http://catalog-service:9001
+      - SPRING_RABBITMQ_HOST=polar-rabbitmq
+    
   catalog-service:
     build:
       context: C:\Users\RANG\Desktop\java_2\polar-service\catalog-service
@@ -11,7 +39,7 @@ services:
       - 9001:9001
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://polar-mysql:3306/catalog?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
-    restart: always
+    
   
   order-service:
     build:
@@ -19,22 +47,35 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - polar-mysql
-      - catalog-service
     image: "order-service"
     container_name: "order-service"
     ports:
       - 9002:9002
     environment:
-      - SPRING_R2DBC_URL=r2dbc:mysql://polar-mysql:3306/order?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+      - SPRING_R2DBC_URL=r2dbc:mysql://polar-mysql:3306/order
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
       - CATALOG_SERVICE_URL=http://catalog-service:9001
-    restart: always
-
+      - SPRING_RABBITMQ_HOST=polar-rabbitmq
+    
   polar-mysql:
     image: "mysql:latest"
     container_name: "polar-mysql"
     ports:
-      - 3309:3306
+      - 3307:3306
     environment:
       - MYSQL_ROOT_PASSWORD=1234     
     volumes:
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  polar-rabbitmq:
+    image: "rabbitmq:management"
+    container_name: "polar-rabbitmq"
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=1234
+    volumes:
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf

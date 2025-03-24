@@ -20,17 +20,17 @@ public record Book(
         @Id
         Long id,
         @NotBlank(message = "The Book ISBN must be defined.")
-                @Pattern(
-                        regexp = "^([0-9]{10}|[0-9]{13})$",
-                        message = "THE ISBN format must be valid"
-                )
+        @Pattern(
+                regexp = "^([0-9]{10}|[0-9]{13})$",
+                message = "THE ISBN format must be valid"
+        )
         String isbn,
         @NotBlank(message = "The Book author must be defined.")
         String author,
         @NotBlank(message = "The Book title must be defined.")
         String title,
         @NotNull(message = "The Book price must be defined.")
-                @Positive(message = "The Book prise must be greater than zero")
+        @Positive(message = "The Book prise must be greater than zero")
         Double price,
         @Column("create_at")
         @CreatedDate
