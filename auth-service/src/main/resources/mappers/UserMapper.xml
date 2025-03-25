@@ -11,6 +11,11 @@
         <result property="role" column="role"/>
     </resultMap>
 
+    <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (user_id, password, user_name, role)
+        VALUES (#{userId}, #{password}, #{userName},#{role})
+    </insert>
+
     <select id="findUserByUserId" parameterType="String" resultMap="userResultMap">
         SELECT id, user_id, password, user_name, role
         FROM user

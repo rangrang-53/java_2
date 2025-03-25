@@ -3,7 +3,7 @@ package com.example.authservice.service;
 import com.example.authservice.config.jwt.JwtProperties;
 import com.example.authservice.model.User;
 import com.example.authservice.type.Role;
-import com.example.dto.ClaimsResponseDTO;
+import com.example.authservice.dto.ClaimsResponseDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -37,7 +37,7 @@ public class TokenProviderService {
         );
     }
 
-    public int validateToken(String token) {
+    public int validToken(String token) {
         try {
             Jwts.parserBuilder()
                     .setSigningKey(getSecretKey())
