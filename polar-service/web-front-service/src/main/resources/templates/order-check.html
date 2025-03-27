@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/orderCheck.js}"></script>
+    <link th:href="@{/css/orderCheck.css}" rel="stylesheet">
+    <title>Main</title>
+</head>
+<body>
+<h1>주문 확인</h1>
+<div>
+    <table border="1" style="border-collapse: collapse;">
+        <thead>
+        <tr>
+            <th>주문 번호</th>
+            <th>책 번호</th>
+            <th>책 제목-책 저자</th>
+            <th>책 가격</th>
+            <th>책 수량</th>
+            <th>상태</th>
+            <th>주문일</th>
+        </tr>
+        </thead>
+        <tbody id="orderList">
+        </tbody>
+    </table>
+    <button onclick="getOrder();">Order GET</button>
+    <button onclick="goOrder();">Order POST</button>
+</div>
+</body>
+</html>

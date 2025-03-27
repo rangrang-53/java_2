@@ -68,7 +68,7 @@ services:
     volumes:
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
-  polar-rabbitmq:
+    polar-rabbitmq:
     image: "rabbitmq:management"
     container_name: "polar-rabbitmq"
     ports:

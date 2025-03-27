@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+  <script th:src="@{/js/common.js}"></script>
+  <script th:src="@{/js/home.js}"></script>
+  <link th:href="@{/css/home.css}" rel="stylesheet">
+  <title>Main</title>
+</head>
+<body>
+<h1>Hello World!</h1>
+<input id="isbn" type="text" placeholder="isbn">
+<div>
+  <input id="title" type="text" placeholder="title">
+  <input id="author" type="text" placeholder="author">
+  <input id="price" type="text" placeholder="price">
+  <div>
+    <button onclick="createCatalog();">Catalog POST</button>
+  </div>
+</div>
+<div>
+  <h1>도서 목록</h1>
+  <table border="1" style="border-collapse: collapse;">
+    <thead>
+    <tr>
+      <th>책 번호</th>
+      <th>책 제목</th>
+      <th>책 저자</th>
+      <th>책 가격</th>
+    </tr>
+    </thead>
+    <tbody id="catalogList">
+    </tbody>
+  </table>
+  <button onclick="getCatalog();">Catalog GET</button>
+</div>
+<button onclick="goOrder();">Order</button>
+</body>
+</html>

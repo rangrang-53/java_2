@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-front-service
+  labels:
+    app: web-front-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-front-service
+  template:
+    metadata:
+      labels:
+        app: web-front-service
+    spec:
+      containers:
+        - name: web-front-service
+          image: web-front-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9005
+          env:
+            - name: EDGE_SERVICE_URL
+              value: http://localhost:9000
