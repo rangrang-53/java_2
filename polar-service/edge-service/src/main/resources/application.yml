@@ -33,7 +33,7 @@ spring:
           filters:
             - name: CircuitBreaker
               args:
-                name: authsCircuitBreaker
+                name: authCircuitBreaker
                 fallbackUri: forward:/service-fallback
 resilience4j:
   circuitbreaker:

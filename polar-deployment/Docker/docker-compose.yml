@@ -11,7 +11,7 @@ services:
     environment:
       - CATALOG_SERVICE_URL=http://catalog-service:9001
       - ORDER_SERVICE_URL=http://order-service:9002
-    
+      - AUTH_SERVICE_URL=http://auth-service:9004
   dispatcher-service:
     build:
       context: C:\Users\RANG\Desktop\java_2\polar-service\dispatcher-service
@@ -57,6 +57,33 @@ services:
       - SPRING_DATASOURCE_PASSWORD=1234
       - CATALOG_SERVICE_URL=http://catalog-service:9001
       - SPRING_RABBITMQ_HOST=polar-rabbitmq
+  web-front-service:
+    build:
+      context: C:\Users\RANG\Desktop\java_2\polar-service\web-front-service
+      dockerfile: Dockerfile
+    depends_on:
+      - polar-mysql
+    image: "web-front-service"
+    container_name: "web-front-service"
+    ports:
+      - 9005:9005
+    environment:
+      - EDGE_SERVICE_URL=http://edge-service:9000
+      - SPRING_RABBITMQ_HOST=polar-rabbitmq
+
+  auth-service:
+    build:
+      context: C:\Users\RANG\Desktop\java_2\auth-service
+      dockerfile: Dockerfile
+    depends_on:
+      - polar-mysql
+    image: "auth-service"
+    container_name: "auth-service"
+    ports:
+      - 9004:9004
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://polar-mysql:3306/auth?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+      - SPRING_RABBITMQ_HOST=polar-rabbitmq
     
   polar-mysql:
     image: "mysql:latest"
@@ -68,7 +95,7 @@ services:
     volumes:
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
-    polar-rabbitmq:
+  polar-rabbitmq:
     image: "rabbitmq:management"
     container_name: "polar-rabbitmq"
     ports:

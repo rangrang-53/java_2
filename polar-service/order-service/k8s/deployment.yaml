@@ -26,7 +26,9 @@ spec:
           ports:
             - containerPort: 9002
           env:
-            - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://polar-mysql:3306/order?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+            - name: SPRING_R2DBC_URL
+              value: r2dbc:mysql://polar-mysql:3306/order?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+            - name: CATALOG_SERVICE_URL
+              value: http://catalog-service:80
 
       

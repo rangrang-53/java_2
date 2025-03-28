@@ -16,10 +16,10 @@ spec:
     spec:
       containers:
         - name: web-front-service
-          image: web-front-service:latest
+          image: web-front-service
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9005
           env:
             - name: EDGE_SERVICE_URL
-              value: http://localhost:9000
+              value: http://edge-service:80
