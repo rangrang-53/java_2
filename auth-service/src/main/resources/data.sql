@@ -1,5 +1,5 @@
-create database auth;
-use auth;
+create database auths;
+use auths;
 
 CREATE TABLE IF NOT EXISTS user (
                                     id BIGINT AUTO_INCREMENT PRIMARY KEY,

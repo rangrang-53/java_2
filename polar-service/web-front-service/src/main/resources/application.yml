@@ -5,4 +5,4 @@ spring:
     name: web-front-service
 
 polar:
-  edge-service-url: ${EDGE_SERVICE_URL:http://localhost:9000}
+  edge-service-url: ${EDGE_SERVICE_URL:http://10.0.1.185:9004}

@@ -7,7 +7,7 @@ spring:
     gateway:
       routes:
         - id: catalog-service
-          uri: ${CATALOG_SERVICE_URL:http://localhost:9001}/books
+          uri: ${CATALOG_SERVICE_URL:http://catalog-service:80}/books
           predicates:
             - Path=/books/**
           filters:
@@ -17,7 +17,7 @@ spring:
                 name: catalogCircuitBreaker
                 fallbackUri: forward:/service-fallback
         - id: order-service
-          uri: ${ORDER_SERVICE_URL:http://localhost:9002}/orders
+          uri: ${ORDER_SERVICE_URL:http://order-service:80}/orders
           predicates:
             - Path=/orders/**
           filters:
@@ -27,10 +27,11 @@ spring:
                 name: orderCircuitBreaker
                 fallbackUri: forward:/service-fallback
         - id: auth-service
-          uri: ${AUTH_SERVICE_URL:http://localhost:9004}/auths
+          uri: ${AUTH_SERVICE_URL:http://auth-service:80}/auths
           predicates:
             - Path=/auths/**
           filters:
+            - name: PreGatewayFilter
             - name: CircuitBreaker
               args:
                 name: authCircuitBreaker

@@ -1,10 +1,14 @@
 server:
   port: 9004
+  address: 0.0.0.0
+  tomcat:
+    accesslog:
+      ipv6-canonical: false
 spring:
   application:
     name: auth-service
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3307/auth?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://10.0.1.70:3306/auths?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8}
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 1234
@@ -16,3 +20,7 @@ mybatis:
 jwt:
   issuer: jr0503@naver.com
   secret_key: 55DQ7XtZjKEuftetbQMtw0geU9SS1rR/fbrPOAqIQ2UUPJ+crjXRoLppDtreyvim53v3U6+hTLcbunHlxlNGlA==
+
+logging:
+  level:
+    org.springframework.security: DEBUG
